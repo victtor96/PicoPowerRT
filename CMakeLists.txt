@@ -21,5 +21,8 @@ target_include_directories(main PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
-target_link_libraries(main pico_stdlib hardware_adc FreeRTOS-Kernel FreeRTOS-Kernel-Heap1)
+target_link_libraries(main 
+        pico_stdlib hardware_adc
+        FreeRTOS-Kernel FreeRTOS-Kernel-Heap1
+)
 pico_add_extra_outputs(main)
