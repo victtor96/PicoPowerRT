@@ -1,0 +1,4 @@
+#define NO_SYS 0
+#define LWIP_PROVIDE_ERRNO 1
+#define LWIP_TIMEVAL_PRIVATE 0
+#define portTICK_RATE_MS portTICK_PERIOD_MS
