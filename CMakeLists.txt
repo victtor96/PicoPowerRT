@@ -25,6 +25,7 @@ target_link_libraries(main
         pico_stdlib
         hardware_adc hardware_irq
         FreeRTOS-Kernel FreeRTOS-Kernel-Heap1
+        pico_async_context_freertos
         pico_lwip_core pico_lwip_core4 pico_lwip_freertos pico_lwip_arch
 )
 pico_add_extra_outputs(main)

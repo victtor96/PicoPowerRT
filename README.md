@@ -23,6 +23,7 @@ sudo dnf install arm-none-eabi-*
 If using the above setup you should
 
 ```
+PICO_BOARD=pico_w
 PICO_SDK_PATH=/opt/pico/pico-sdk
 RTOS_KERNEL_PATH=/opt/pico/FreeRTOS-Kernel
 ```
