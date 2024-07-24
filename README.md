@@ -5,7 +5,7 @@ This repository contains a clean starting point for using Raspberry Pi Pico W wi
 The following environment variables must be defined:
 
 * `PICO_SDK_PATH`: Full path to the pico-SDK.
-* `FREERTOS_KERNEL_PATH`: Full path to the SMP variant of the FreeRTOS kernel.
+* `FREERTOS_KERNEL_PATH`: Full path to the FreeRTOS kernel.
 
 # Setting up
 Start by installing arm-none-eabi-gcc, make, cmake, and git. Then:
@@ -13,7 +13,7 @@ Start by installing arm-none-eabi-gcc, make, cmake, and git. Then:
 ```
 sudo mkdir /opt/pico
 cd /opt/pico
-sudo git clone --depth 1 --branch smp https://github.com/FreeRTOS/FreeRTOS-Kernel
+sudo git clone --depth 1 https://github.com/FreeRTOS/FreeRTOS-Kernel
 sudo git clone --depth 1 --branch master https://github.com/raspberrypi/pico-sdk
 cd /opt/pico/pick-sdk
 sudo git submodule update --init --depth 1
