@@ -5,10 +5,10 @@ This repository contains a clean starting point for using Raspberry Pi Pico W wi
 The following environment variables must be defined:
 
 * `PICO_SDK_PATH`: Full path to the pico-SDK.
-* `RTOS_KERNEL_PATH`: Full path to the SMP variant of the FreeRTOS kernel.
+* `FREERTOS_KERNEL_PATH`: Full path to the SMP variant of the FreeRTOS kernel.
 
 # Setting up
-On Fedora 37:
+Start by installing arm-none-eabi-gcc, make, cmake, and git. Then:
 
 ```
 sudo mkdir /opt/pico
@@ -16,14 +16,19 @@ cd /opt/pico
 sudo git clone --depth 1 --branch smp https://github.com/FreeRTOS/FreeRTOS-Kernel
 sudo git clone --depth 1 --branch master https://github.com/raspberrypi/pico-sdk
 cd /opt/pico/pick-sdk
-sudo git submodule --init --depth 1
-sudo dnf install arm-none-eabi-*
+sudo git submodule update --init --depth 1
 ```
 
-If using the above setup you should
+Then, for building you should:
 
 ```
-PICO_BOARD=pico_w
-PICO_SDK_PATH=/opt/pico/pico-sdk
-RTOS_KERNEL_PATH=/opt/pico/FreeRTOS-Kernel
+export PICO_BOARD=pico_w
+export PICO_SDK_PATH=/opt/pico/pico-sdk
+export FREERTOS_KERNEL_PATH=/opt/pico/FreeRTOS-Kernel
+cd /tmp
+git clone https://gitlab.com/lucas.hartmann/raspberry_pico_freertos
+mkdir raspberry_pico_freertos/build
+cd raspberry_pico_freertos/build
+cmake ..
+make
 ```
