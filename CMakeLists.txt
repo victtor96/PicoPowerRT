@@ -9,6 +9,7 @@ include(FreeRTOS_Kernel_import.cmake)
 project(example C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
+set(PICO_BOARD pico_w)
 
 pico_sdk_init()
 
@@ -17,15 +18,20 @@ add_executable(main
         hooks.cpp
 )
 
+target_compile_definitions(main PRIVATE
+        WIFI_SSID=\"$ENV{WIFI_SSID}\"
+        WIFI_PASSWORD=\"$ENV{WIFI_PASSWORD}\"
+)
+
 target_include_directories(main PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
 target_link_libraries(main 
         pico_stdlib
-        hardware_adc hardware_irq
-        FreeRTOS-Kernel FreeRTOS-Kernel-Heap1
-        pico_async_context_freertos
-        pico_lwip_core pico_lwip_core4 pico_lwip_freertos pico_lwip_arch
+        hardware_adc
+        hardware_irq
+        FreeRTOS-Kernel-Heap4
+        pico_cyw43_arch_lwip_sys_freertos
 )
 pico_add_extra_outputs(main)

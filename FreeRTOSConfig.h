@@ -43,7 +43,7 @@
 /* Scheduler Related */
 #define configUSE_PREEMPTION                    1
 #define configUSE_TICKLESS_IDLE                 0
-#define configUSE_IDLE_HOOK                     0
+#define configUSE_IDLE_HOOK                     1
 #define configUSE_TICK_HOOK                     1
 #define configTICK_RATE_HZ                      ( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES                    32
@@ -109,8 +109,8 @@
 #define configUSE_PASSIVE_IDLE_HOOK             0
 
 /* RP2040 specific */
-#define configSUPPORT_PICO_SYNC_INTEROP         1
-#define configSUPPORT_PICO_TIME_INTEROP         1
+#define configSUPPORT_PICO_SYNC_INTEROP         0
+#define configSUPPORT_PICO_TIME_INTEROP         0
 
 #include <assert.h>
 /* Define to trap errors during development. */

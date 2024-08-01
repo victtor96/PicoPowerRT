@@ -5,31 +5,50 @@
 /* Library includes. */
 #include <stdio.h>
 #include <pico/stdio.h>
+#include <pico/cyw43_arch.h>
 #include <pico/lwip_freertos.h>
 #include <pico/async_context_freertos.h>
 
-async_context_freertos_t async_context;
-async_context_freertos_config async_config = {
-    .task_priority = 9,
-    .task_stack_size = 1024
-};
+#include <lwip/raw.h>
+#include <lwip/tcp.h>
 
 static void sample_task(void *) {
+    // Start wifi
+    printf("Starting wifi...\n");
+    if (cyw43_arch_init()) {
+        printf("failed to initialise\n");
+        while(true);
+    }
+    cyw43_arch_enable_sta_mode();
+    if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
+        printf("failed to connect.\n");
+        exit(1);
+    } else {
+        printf("Connected.\n");
+    }
+
+    int i=0;
     while(true) {
-        asm(" nop");
-        vTaskDelay(5*configTICK_RATE_HZ);
+        uint32_t ip = netif_ip4_addr(netif_default)->addr;
+        printf("%d: %d.%d.%d.%d\n", 
+            i++,
+            ip % 256,
+            ip / 256 % 256,
+            ip / 256 / 256 % 256,
+            ip / 256 / 256 / 256 % 256
+        );
+
+        vTaskDelay(configTICK_RATE_HZ);
     }
 }
 
 int main( void ) {
     stdio_init_all();
-    printf("FreeRTOS-SMP started.\n");
 
-    async_context_freertos_init(&async_context, &async_config);
-    lwip_freertos_init((async_context_t*)&async_context);
+    printf("Creating tasks...\n");
+    xTaskCreate(sample_task, "sample", 2048, NULL, 10, NULL);
 
-    xTaskCreate(sample_task, "sample", 128, NULL, 10, NULL);
-
+    printf("Starting FreeRTOS-SMP scheduler...\n");
     vTaskStartScheduler();
     return 0;
 }
