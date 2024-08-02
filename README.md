@@ -14,7 +14,7 @@ Start by installing arm-none-eabi-gcc, make, cmake, and git. Then:
 sudo mkdir /opt/pico
 cd /opt/pico
 sudo git clone --depth 1 https://github.com/FreeRTOS/FreeRTOS-Kernel
-sudo git clone --depth 1 --branch master https://github.com/raspberrypi/pico-sdk
+sudo git clone --depth 1 https://github.com/raspberrypi/pico-sdk
 cd /opt/pico/pico-sdk
 sudo git submodule update --init --depth 1
 ```
