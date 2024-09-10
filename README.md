@@ -2,11 +2,6 @@
 
 This repository contains a clean starting point for using Raspberry Pi Pico W with FreeRTOS.
 
-The following environment variables must be defined:
-
-* `PICO_SDK_PATH`: Full path to the pico-SDK.
-* `FREERTOS_KERNEL_PATH`: Full path to the FreeRTOS kernel.
-
 # Setting up
 Start by installing [pico-sdk](https://github.com/raspberrypi/pico-sdk) and it's dependencies:
 
@@ -23,12 +18,14 @@ cd /opt/pico/pico-sdk
 sudo git submodule update --init --depth 1
 ```
 
-For convenience, create a file at `/opt/pico/sourceme` which sets the required environment variables.
+For convenience, create a file at `/opt/pico/sourceme` which sets the required environment variables. If you choose not to create this file, then you will need to set the variables some other way.
 
 ```sh
 export PICO_BOARD=pico_w
 export PICO_SDK_PATH=/opt/pico/pico-sdk
 export FREERTOS_KERNEL_PATH=/opt/pico/FreeRTOS-Kernel
+export WIFI_SSID=your_wifi_name
+export WIFI_PASSWORD=public_secret
 ```
 
 Then, for building you should:
