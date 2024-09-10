@@ -1,5 +1,5 @@
 /*
- * FreeRTOS V202107.00
+ * FreeRTOS V202111.00
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -25,8 +25,8 @@
  * 1 tab == 4 spaces!
  */
 
-#ifndef FREERTOS_CONFIG_H
-#define FREERTOS_CONFIG_H
+#ifndef FREERTOS_CONFIG_EXAMPLES_COMMON_H
+#define FREERTOS_CONFIG_EXAMPLES_COMMON_H
 
 /*-----------------------------------------------------------
  * Application specific definitions.
@@ -43,11 +43,11 @@
 /* Scheduler Related */
 #define configUSE_PREEMPTION                    1
 #define configUSE_TICKLESS_IDLE                 0
-#define configUSE_IDLE_HOOK                     1
-#define configUSE_TICK_HOOK                     1
+#define configUSE_IDLE_HOOK                     0
+#define configUSE_TICK_HOOK                     0
 #define configTICK_RATE_HZ                      ( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES                    32
-#define configMINIMAL_STACK_SIZE                ( configSTACK_DEPTH_TYPE ) 256
+#define configMINIMAL_STACK_SIZE                ( configSTACK_DEPTH_TYPE ) 512
 #define configUSE_16_BIT_TICKS                  0
 
 #define configIDLE_SHOULD_YIELD                 1
@@ -61,7 +61,8 @@
 #define configUSE_QUEUE_SETS                    1
 #define configUSE_TIME_SLICING                  1
 #define configUSE_NEWLIB_REENTRANT              0
-#define configENABLE_BACKWARD_COMPATIBILITY     0
+// todo need this for lwip FreeRTOS sys_arch to compile
+#define configENABLE_BACKWARD_COMPATIBILITY     1
 #define configNUM_THREAD_LOCAL_STORAGE_POINTERS 5
 
 /* System */
@@ -75,8 +76,8 @@
 #define configAPPLICATION_ALLOCATED_HEAP        0
 
 /* Hook function related definitions. */
-#define configCHECK_FOR_STACK_OVERFLOW          2
-#define configUSE_MALLOC_FAILED_HOOK            1
+#define configCHECK_FOR_STACK_OVERFLOW          0
+#define configUSE_MALLOC_FAILED_HOOK            0
 #define configUSE_DAEMON_TASK_STARTUP_HOOK      0
 
 /* Run time and task stats gathering related definitions. */
@@ -101,16 +102,30 @@
 #define configMAX_API_CALL_INTERRUPT_PRIORITY   [dependent on processor and application]
 */
 
-/* SMP port only */
 #define configNUMBER_OF_CORES                   2
+/* SMP (configNUMBER_OF_CORES > 1) only */
 #define configTICK_CORE                         0
 #define configRUN_MULTIPLE_PRIORITIES           1
+#if configNUMBER_OF_CORES > 1
 #define configUSE_CORE_AFFINITY                 1
+#endif
 #define configUSE_PASSIVE_IDLE_HOOK             0
 
-/* RP2040 specific */
+/* Armv8-M */
+
+/* Not currently supported */
+#define configENABLE_MPU                        0
+//#define configSYSTEM_CALL_STACK_SIZE            ( configSTACK_DEPTH_TYPE ) 512
+#define configENABLE_FPU                        1
+/* Not currently supported */
+#define configENABLE_TRUSTZONE                  0
+#define configRUN_FREERTOS_SECURE_ONLY          1
+// see https://www.freertos.org/RTOS-Cortex-M3-M4.html
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY    16
+
+/* RP2xxx specific */
 #define configSUPPORT_PICO_SYNC_INTEROP         1
-#define configSUPPORT_PICO_TIME_INTEROP         0
+#define configSUPPORT_PICO_TIME_INTEROP         1
 
 #include <assert.h>
 /* Define to trap errors during development. */
