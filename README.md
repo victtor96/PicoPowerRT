@@ -2,7 +2,7 @@
 
 Sistema embarcado em tempo real com Raspberry Pi Pico W e FreeRTOS para aquisicao de sinais de tensao/corrente via ADC, calculo RMS em pipeline com filas e exibicao dos resultados em OLED SSD1306 via I2C.
 
-## Descricao do Projeto (Portfolio)
+## Descricao do Projeto 
 
 Este projeto demonstra um pipeline embarcado em tempo real focado em desempenho, previsibilidade e modularidade.
 
@@ -75,7 +75,7 @@ API publica principal:
 - `vApplicationIdleHook`: hook de ociosidade (atualmente vazio).
 - `vApplicationTickHook`: hook de tick (atualmente vazio).
 
-## Diferenciais Tecnicos (Portfolio)
+## Diferenciais Tecnicos 
 
 - Pipeline orientado a tempo real com separacao clara entre aquisicao, processamento e exibicao.
 - Uso de pool fixo de memoria para reduzir fragmentacao e latencia imprevisivel.
