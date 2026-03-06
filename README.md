@@ -140,10 +140,3 @@ Opcao com script:
 
 - Terminal serial com logs de `RMS V` e `RMS I`.
 - OLED com RMS de tensao na linha superior e RMS de corrente na linha inferior.
-
-## Evolucoes Recomendadas
-
-1. Publicar `ID` da janela no resultado RMS para rastreabilidade.
-2. Implementar watchdog de filas para detectar starvation.
-3. Adicionar task de comunicacao (UART/Wi-Fi/MQTT) para telemetria externa.
-4. Validar e documentar procedimento de calibracao experimental dos ganhos `kv` e `kvi`.
