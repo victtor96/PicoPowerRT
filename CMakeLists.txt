@@ -13,6 +13,8 @@ pico_sdk_init()
 
 add_executable(main
         main.cpp
+        hooks.cpp
+        ssd1306.c
 )
 
 target_compile_definitions(main PRIVATE
@@ -28,6 +30,9 @@ target_link_libraries(main
         pico_stdlib
         FreeRTOS-Kernel-Heap4
         pico_cyw43_arch_lwip_sys_freertos
+        hardware_adc
+        hardware_irq
+        hardware_i2c
 )
 pico_add_extra_outputs(main)
 pico_enable_stdio_usb(main 1)

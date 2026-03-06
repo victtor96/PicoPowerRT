@@ -19,4 +19,5 @@ while sleep 0.5; do
         sync
         echo "Done."
     }
+    make -C build
 done
